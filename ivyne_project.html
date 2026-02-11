@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ivyne ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    background:pink;
+    overflow:hidden;
+    text-align:center;
+    font-family:Arial, sans-serif;
+}
+
+h1{
+    margin-top:100px;
+    color:white;
+    text-shadow:2px 2px 15px red;
+}
+
+button{
+    padding:15px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yesBtn{ background:red; color:white; }
+#noBtn{ background:white; color:red; position:absolute; }
+
+.flower,.heart,.firework{
+    position:absolute;
+    font-size:25px;
+    animation: float 8s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+
+#countdown{
+    font-size:70px;
+    color:red;
+    margin-top:150px;
+    text-shadow:3px 3px 20px white;
+    animation:pulse 1s infinite alternate;
+}
+
+@keyframes pulse{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+
+#kiss{
+    font-size:90px;
+    animation:kiss 1s infinite alternate;
+}
+
+@keyframes kiss{
+    from{transform:scale(1);}
+    to{transform:scale(1.3);}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* PASSWORD */
+const password="Ivyne2026"; 
+let input=prompt("Enter the secret password ❤️");
+
+if(input!==password){
+    document.body.innerHTML="<h1>Access Denied 💔</h1>";
+}else{
+    fadeInMusic();
+    dramaticCountdown();
+}
+
+/* MUSIC FADE IN */
+function fadeInMusic(){
+    let music=document.getElementById("music");
+    music.volume=0;
+    music.play();
+    let vol=0;
+    let fade=setInterval(()=>{
+        if(vol<1){
+            vol+=0.05;
+            music.volume=vol;
+        }else{
+            clearInterval(fade);
+        }
+    },500);
+}
+
+/* DRAMATIC 30 SECOND COUNTDOWN */
+function dramaticCountdown(){
+    let time=30;
+    document.body.innerHTML=`<div id="countdown">${time}</div>`;
+    flowers();
+    hearts();
+
+    let timer=setInterval(()=>{
+        time--;
+        document.getElementById("countdown").innerHTML=time;
+        if(time<=0){
+            clearInterval(timer);
+            showIntro();
+        }
+    },1000);
+}
+
+/* INTRO SCREEN */
+function showIntro(){
+    document.body.innerHTML=`
+    <h1>Ivyne ❤️<br>I Have Something Very Special For You...</h1>
+    <button onclick="showProposal()">Click To Reveal 💖</button>
+    `;
+    fireworks();
+}
+
+/* PROPOSAL */
+function showProposal(){
+    document.body.innerHTML=`
+    <h1>Ivyne ❤️<br>Will You Be My Valentine?</h1>
+    <div style="margin-top:40px;">
+    <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+    <button id="noBtn" onmouseover="moveNo()">No 💔</button>
+    </div>
+    `;
+    flowers();
+}
+
+let yesSize=20;
+
+/* NO BUTTON RUNS + YES GROWS */
+function moveNo(){
+    const no=document.getElementById("noBtn");
+    const yes=document.getElementById("yesBtn");
+
+    no.style.top=Math.random()*window.innerHeight+"px";
+    no.style.left=Math.random()*window.innerWidth+"px";
+
+    yesSize+=10;
+    yes.style.fontSize=yesSize+"px";
+    yes.style.padding=(yesSize/2)+"px";
+}
+
+/* WHEN SHE CLICKS YES */
+function sayYes(){
+    document.body.innerHTML=`
+    <h1>IVYNE SAID YES!!! ❤️🎉🔥</h1>
+    <div id="kiss">💑💋</div>
+    `;
+    fireworks();
+    hearts();
+}
+
+/* FLOWERS */
+function flowers(){
+    setInterval(()=>{
+        let f=document.createElement("div");
+        f.className="flower";
+        f.innerHTML="🌹";
+        f.style.left=Math.random()*100+"vw";
+        f.style.animationDuration=(5+Math.random()*5)+"s";
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),8000);
+    },400);
+}
+
+/* HEARTS */
+function hearts(){
+    setInterval(()=>{
+        let h=document.createElement("div");
+        h.className="heart";
+        h.innerHTML="💖";
+        h.style.left=Math.random()*100+"vw";
+        h.style.animationDuration=(3+Math.random()*3)+"s";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+    },200);
+}
+
+/* FIREWORKS */
+function fireworks(){
+    setInterval(()=>{
+        let fw=document.createElement("div");
+        fw.className="firework";
+        fw.innerHTML="🎆";
+        fw.style.left=Math.random()*100+"vw";
+        fw.style.animationDuration=(2+Math.random()*3)+"s";
+        document.body.appendChild(fw);
+        setTimeout(()=>fw.remove(),5000);
+    },300);
+}
+
+</script>
+
+</body>
+</html>
